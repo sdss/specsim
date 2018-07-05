@@ -710,4 +710,5 @@ def load_config(name, config_type=Configuration):
             next_value_is_key = isinstance(token, yaml.KeyToken)
 
     with open(file_name) as f:
-        return config_type(yaml.safe_load(f))
+        config = config_type(yaml.safe_load(f))
+        return config

@@ -40,6 +40,7 @@ import specsim.instrument
 import specsim.source
 import specsim.fiberloss
 import specsim.observation
+import specsim.telescope
 
 
 class Simulator(object):
@@ -63,7 +64,7 @@ class Simulator(object):
     verbose : bool
         Print information about the simulation progress.
     """
-    def __init__(self, config, num_fibers=2, camera_output=True, verbose=False):
+    def __init__(self, config, num_fibers=2, camera_output=True, verbose=False, params=None):
 
         if specsim.config.is_string(config):
             config = specsim.config.load_config(config)
@@ -75,6 +76,7 @@ class Simulator(object):
         self.instrument = specsim.instrument.initialize(config, camera_output)
         self.source = specsim.source.initialize(config)
         self.observation = specsim.observation.initialize(config)
+        self.telescope = specsim.telescope.initialize(config, params=params)
 
         self._num_fibers = int(num_fibers)
         if self._num_fibers < 1:
